@@ -2,6 +2,42 @@
     this is where you will add your JavaScript to complete Lab 5
 */
 
+$(function(){
+
+    render(entries);
+
+
+});
+
+function render(entries){
+    var instance;
+    $('.address-book').empty();
+    $.each(entries, function(){
+        instance = $('.template').clone();
+        for(prop in this){
+            if(prop === "img"){
+                instance.find('.pic').attr({
+                    src: this.pic,
+                    alt: 'Picture of' + this.first + ' ' + this.last
+                });
+            }else{
+                instance.find('.'+ prop).html(this[prop]);
+            }
+        }
+        
+        // instance.find('.first').html(this.first);
+        // instance.find('.last').html(this.last);
+        // instance.find('.title').html(this.title);
+        // instance.find('.dept').html(this.dept);
+        
+        instance.removeClass('template');
+        $('.address-book').append(instance);
+    });
+}
+
+
+
+
 
 /* sortObjArray()
     sorts an array of objects by a given property name
